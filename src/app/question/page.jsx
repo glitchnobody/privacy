@@ -38,15 +38,15 @@ component main { public [ a ] } = SumArray();
             theme={dracula}
           />
         </div>
-        <button className="luma-checkout--button md:w-fit md:self-end mt-7 ">
-          <a
-            href="https://lu.ma/event/evt-ltqCQTvySfYQFGn"
-            data-luma-action="checkout"
-            data-luma-event-id="evt-ltqCQTvySfYQFGn"
-          >
-            Submit Solution
-          </a>
-        </button>
+
+        <a
+          href="https://lu.ma/event/evt-ltqCQTvySfYQFGn"
+          data-luma-action="checkout"
+          className="luma-checkout--button md:w-fit md:self-end mt-7 "
+          data-luma-event-id="evt-ltqCQTvySfYQFGn"
+        >
+          <button> Submit Solution</button>
+        </a>
       </div>
     </main>
   );
