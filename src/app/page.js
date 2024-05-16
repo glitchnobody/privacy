@@ -99,7 +99,9 @@ export default function Home() {
 
         {videoEnded && (
           <Link href="/question">
-            <button className="luma-checkout--button">Get Started</button>
+            <button className="   bg-cyan-950 text-white px-12 h-fit py-2 rounded-full">
+              Get Started
+            </button>
           </Link>
         )}
       </div>
