@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import LoaderImage from "./image.jpg";
 import Link from "next/link";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(true);
@@ -45,9 +47,22 @@ export default function Home() {
       setIsMuted(!isMuted);
     }
   };
+  const [init, setInit] = useState(false);
+
+  const particlesLoaded = (container) => {
+    console.log(container);
+  };
+
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
 
   return (
-    <main className=" h-dvh w-full bg-black overflow-hidden">
+    <main className=" h-dvh w-full  overflow-hidden">
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
@@ -103,6 +118,83 @@ export default function Home() {
               Get Started
             </button>
           </Link>
+        )}
+      </div>
+      <div className=" absolute -z-10 top-0">
+        {init && (
+          <Particles
+            id="tsparticles"
+            particlesLoaded={particlesLoaded}
+            options={{
+              background: {
+                color: {
+                  value: "#000",
+                },
+              },
+              fpsLimit: 120,
+              interactivity: {
+                events: {
+                  onClick: {
+                    enable: true,
+                    mode: "push",
+                  },
+                  onHover: {
+                    enable: true,
+                    mode: "repulse",
+                  },
+                  resize: true,
+                },
+                modes: {
+                  push: {
+                    quantity: 4,
+                  },
+                  repulse: {
+                    distance: 200,
+                    duration: 0.4,
+                  },
+                },
+              },
+              particles: {
+                color: {
+                  value: "#ffffff",
+                },
+                links: {
+                  color: "#ffffff",
+                  distance: 150,
+                  enable: false,
+                  opacity: 0.5,
+                  width: 1,
+                },
+                move: {
+                  direction: "none",
+                  enable: true,
+                  outModes: {
+                    default: "bounce",
+                  },
+                  random: false,
+                  speed: 2,
+                  straight: false,
+                },
+                number: {
+                  density: {
+                    enable: true,
+                    area: 800,
+                  },
+                  value: 200,
+                },
+                opacity: {
+                  value: 0.5,
+                },
+                shape: {
+                  type: "circle",
+                },
+                size: {
+                  value: { min: 1, max: 3 },
+                },
+              },
+              detectRetina: true,
+            }}
+          />
         )}
       </div>
     </main>
