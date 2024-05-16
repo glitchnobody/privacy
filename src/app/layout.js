@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +12,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          id="luma-checkout"
+          src="https://embed.lu.ma/checkout-button.js"
+          async
+        ></script>
+      </head>
+
       <body className={inter.className}>{children}</body>
     </html>
   );

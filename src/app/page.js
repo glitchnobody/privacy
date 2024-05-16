@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import LoaderImage from "./image.jpg";
+import Link from "next/link";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(true);
@@ -49,15 +51,23 @@ export default function Home() {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="absolute top-0  text-white left-0 gap-5 w-full h-full flex flex-col items-center justify-center bg-black z-10"
+          className=" cursor-pointer absolute top-0  text-white left-0 gap-5 w-full h-full flex flex-col items-center justify-center bg-black z-10"
         >
+          <div className=" cursor-pointer rounded-md overflow-hidden w-[400px] aspect-[384/128] relative">
+            <Image
+              src={LoaderImage}
+              fill
+              alt="loader image"
+              className="object-contain object-center"
+            />
+          </div>
           <h1 className=" text-5xl">Are You Ready?</h1>
           <span className="  text-gray-300 text-sm">
             Click anywhere to enter
           </span>
         </div>
       )}
-      <div className="flex flex-col items-center justify-center gap-4 h-full w-full">
+      <div className="flex flex-col items-center justify-center gap-9 h-full w-full">
         <div className=" w-full aspect-video h-auto max-h-[70vh]">
           <video
             ref={videoRef}
@@ -75,13 +85,22 @@ export default function Home() {
             <button className=" text-gray-400" onClick={toggleMute}>
               {isMuted ? "Unmute" : "Mute"}
             </button>
+            <button
+              className=" text-gray-400"
+              onClick={() =>
+                videoRef.current &&
+                (videoRef.current.currentTime = videoRef.current.duration)
+              }
+            >
+              Skip
+            </button>
           </div>
         </div>
 
         {videoEnded && (
-          <button className="bg-pink-600 text-white hover:bg-pink-800 active:bg-pink-600 min-w-[200px] px-4 py-2 rounded-lg ">
-            CTA
-          </button>
+          <Link href="/question">
+            <button className="luma-checkout--button">Get Started</button>
+          </Link>
         )}
       </div>
     </main>
