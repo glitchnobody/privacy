@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(true);
+  const [videoEnded, setVideoEnded] = useState(false);
 
   const videoRef = useRef(null);
 
@@ -41,11 +42,14 @@ export default function Home() {
           playsInline
           preload="auto"
           muted={false}
+          onEnded={() => setVideoEnded(true)}
           className="w-full aspect-video h-auto max-h-[70vh] object-contain "
         ></video>
-        <button className="bg-pink-600 text-white hover:bg-pink-800 active:bg-pink-600 min-w-[200px] px-4 py-2 rounded-lg ">
-          <a href="">CTA</a>
-        </button>
+        {videoEnded && (
+          <button className="bg-pink-600 text-white hover:bg-pink-800 active:bg-pink-600 min-w-[200px] px-4 py-2 rounded-lg ">
+            <a href="">CTA</a>
+          </button>
+        )}
       </div>
     </main>
   );
