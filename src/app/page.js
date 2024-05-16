@@ -47,7 +47,7 @@ export default function Home() {
         ></video>
         {videoEnded && (
           <button className="bg-pink-600 text-white hover:bg-pink-800 active:bg-pink-600 min-w-[200px] px-4 py-2 rounded-lg ">
-            <a href="">CTA</a>
+            CTA
           </button>
         )}
       </div>
