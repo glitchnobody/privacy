@@ -5,22 +5,44 @@ import { useState, useRef, useEffect } from "react";
 export default function Home() {
   const [isOpen, setIsOpen] = useState(true);
   const [videoEnded, setVideoEnded] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
 
   const videoRef = useRef(null);
 
   useEffect(() => {
-    const handleMouseMove = () => {
-      if (videoRef.current) {
+    const handleFirstClick = () => {
+      if (videoRef.current && !hasPlayed) {
         videoRef.current.play();
+        setHasPlayed(true);
       }
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("click", handleMouseMove);
+
+    window.addEventListener("click", handleFirstClick);
+
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("click", handleMouseMove);
+      window.removeEventListener("click", handleFirstClick);
     };
-  }, []);
+  }, [hasPlayed]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
 
   return (
     <main className=" h-dvh w-full bg-black overflow-hidden">
@@ -36,15 +58,26 @@ export default function Home() {
         </div>
       )}
       <div className="flex flex-col items-center justify-center gap-4 h-full w-full">
-        <video
-          ref={videoRef}
-          src="/privacywars.mp4"
-          playsInline
-          preload="auto"
-          muted={false}
-          onEnded={() => setVideoEnded(true)}
-          className="w-full aspect-video h-auto max-h-[70vh] object-contain "
-        ></video>
+        <div className=" w-full aspect-video h-auto max-h-[70vh]">
+          <video
+            ref={videoRef}
+            src="/privacywars.mp4"
+            playsInline
+            preload="auto"
+            muted={false}
+            onEnded={() => setVideoEnded(true)}
+            className=" w-full h-full object-contain "
+          ></video>
+          <div className=" flex w-full items-end justify-center gap-10">
+            <button className=" text-gray-400" onClick={togglePlay}>
+              {isPlaying ? "Pause" : "Play"}
+            </button>
+            <button className=" text-gray-400" onClick={toggleMute}>
+              {isMuted ? "Unmute" : "Mute"}
+            </button>
+          </div>
+        </div>
+
         {videoEnded && (
           <button className="bg-pink-600 text-white hover:bg-pink-800 active:bg-pink-600 min-w-[200px] px-4 py-2 rounded-lg ">
             CTA
