@@ -47,8 +47,8 @@ export default function Page() {
       <div className=" flex mx-auto w-full max-w-5xl flex-col ">
         <h1 className=" text-3xl font-bold mt-20">Solve this question</h1>
         <h2 className=" text-lg font-medium mt-7 mb-8">
-          Find the bug in the circa code below to find the sum of elements of an
-          array and how you will fix it.
+          This program calculates the sum of the values in an array, find the
+          bug in it and submit your fixed code:
         </h2>
         <div className="w-full text-sm bg-[#282a36]   overflow-x-auto">
           <CopyBlock
