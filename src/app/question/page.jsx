@@ -30,9 +30,12 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="bg-white w-full md:h-[70vh] h-[calc(100dvh-60px)] mt-[40px]   max-w-md rounded-lg overflow-hidden">
+          <div className="bg-white w-full max-w-[600px] md:h-[80vh] h-[calc(100dvh-60px)] mt-[40px]    rounded-lg overflow-hidden">
             <iframe
-              src="https://lu.ma/embed-checkout/evt-ltqCQTvySfYQFGn"
+              style={{
+                scrollbarWidth: "none",
+              }}
+              src="https://lu.ma/embed-checkout/evt-5wavN10kbR6j7ur"
               width="100%"
               height="100%"
               frameborder="0"
